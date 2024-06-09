@@ -1,0 +1,87 @@
+package com.trinadh.java8Features.LambdaDemo;
+@FunctionalInterface
+interface Calculator{
+	public void action();
+}
+public class CalculatorImp implements Calculator{
+	@Override
+	public void action() {
+		System.out.println("this is interface function Calculator action");
+	}
+	public static void main(String args[]) {
+		System.out.println("Hello Trinadh it's a lambda function demo");
+		new CalculatorImp().action();
+	}
+	
+
+
+}
+
+//-----------------------------
+
+//by using lambda function
+
+package com.trinadh.java8Features.LambdaDemo;
+@FunctionalInterface
+interface Calculator{	
+	public void action();
+}
+public class CalculatorImp{
+	public static void main(String args[]) {
+		System.out.println("Hello Trinadh it's a lambda function demo");
+	  Calculator cal = () -> System.out.println("this is interface function Calculator action");
+	  cal.action();
+	}
+}
+
+//---------------------------------
+
+package com.trinadh.java8Features.LambdaDemo;
+
+interface Calculator{
+	
+	//public void action();
+	
+	public int sum(int a, int b);
+}
+
+public class CalculatorImp /* implements Calculator */{
+	
+	/*
+	 * @Override public void action() {
+	 * System.out.println("this is interface function Calculator action"); }
+	 */
+	public static void main(String args[]) {
+		System.out.println("Hello Trinadh it's a lambda function demo");
+		//new CalculatorImp().action();
+		
+		/*
+		 * Calculator cal = () ->
+		 * System.out.println("this is interface function Calculator action");
+		 * cal.action();
+		 */
+		
+		//Calculator cal = (a,b) -> a + b;
+		
+		//System.out.println("sum is : " + cal.sum(5, 7));
+		
+		Calculator cal = (a,b) ->{
+			if(b < a)
+				throw new RuntimeException("message");
+			else
+				return a+b;
+		};
+		
+		System.out.println(cal.sum(22,22));
+	}
+}
+
+//=======================================
+
+
+
+
+
+
+
+
