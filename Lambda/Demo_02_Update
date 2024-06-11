@@ -1,0 +1,85 @@
+package com.trinadh.java8Features.LambdaDemo;
+
+public class Book {
+
+	public Book(int id, String name, int pages) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.pages = pages;
+	}
+
+	private int id;
+	private String name;
+	private int pages;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getPages() {
+		return pages;
+	}
+
+	public void setPages(int pages) {
+		this.pages = pages;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", name=" + name + ", pages=" + pages + "]";
+	}
+
+}
+
+//--------------------------------
+
+package com.trinadh.java8Features.LambdaDemo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BookDAO {
+
+	public List<Book> getBooks() {
+		List<Book> books = new ArrayList<>();
+		books.add(new Book(101, "Core Java", 400));
+		books.add(new Book(102, "Spring", 500));
+		books.add(new Book(103, "React", 600));
+		books.add(new Book(104, "python ", 700));
+		return books;
+	}
+
+}
+
+//--------------------------
+package com.trinadh.java8Features.LambdaDemo;
+
+import java.util.Collections;
+import java.util.List;
+
+public class BookService {
+
+	public List<Book> getBooksinSort() {
+		List<Book> books = new BookDAO().getBooks();
+		Collections.sort(books, (b1, b2) -> b1.getName().compareTo(b2.getName()));
+		return books;
+	}
+
+	public static void main(String args[]) {
+		System.out.println(new BookService().getBooksinSort());
+	}
+
+}
