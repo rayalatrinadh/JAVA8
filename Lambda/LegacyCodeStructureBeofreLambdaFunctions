@@ -1,0 +1,33 @@
+//Legacy Code Structure before Lambda Functional Syntax
+  //1. Need to implements Interface 
+  //2. Need to write the override method
+
+package Trinadh.Java8LearningsTuts;
+
+@FunctionalInterface
+interface Trinadh{
+    //abstract method
+    void behaviour();
+
+    //can have default or static methods
+    public static void city(){
+        System.out.println("Chicago");
+    }
+
+    default void state(){
+        System.out.println("Illinois");
+    }
+}
+
+public class LambdaFunctionUseCase implements  Trinadh {
+    @Override
+    public void behaviour() {
+        System.out.println("very very bad");
+    }
+
+    public static void main(String args[]){
+        System.out.println("LambdaFunctionalUseCase");
+        Trinadh thea = new LambdaFunctionUseCase();
+        thea.behaviour();
+    }
+}
