@@ -1,0 +1,25 @@
+package Trinadh.Java8LearningsTuts;
+
+@FunctionalInterface
+interface Trinadh{
+    //abstract method
+    void behaviour();
+
+    //can have default or static methods
+    public static void city(){
+        System.out.println("Chicago");
+    }
+
+    default void state(){
+        System.out.println("Illinois");
+    }
+}
+
+public class LambdaFunctionUseCase{
+
+    public static void main(String args[]){
+        System.out.println("LambdaFunctionalUseCase");
+        Trinadh tr = () -> System.out.println("Very very bad");
+        tr.behaviour();
+    }
+}
