@@ -8,7 +8,7 @@ interface Trinadh{
     //can have default or static methods
     public static void city(){
         System.out.println("Chicago");
-    }
+    } 
 
     default void state(){
         System.out.println("Illinois");
