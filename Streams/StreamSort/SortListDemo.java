@@ -31,5 +31,6 @@ public class SortListDemo {
         list.stream().sorted(Collections.reverseOrder()).forEach(t->System.out.print(t + " "));
         //output: 12 4 3 2
 
+
     }
 }
