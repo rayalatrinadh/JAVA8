@@ -50,16 +50,28 @@ public class ForEachDemo {
 
         System.out.println(" need to print names start with r in traditional approach");
         for (String str : list2) {
-            if(str.startsWith("r")){
+            if (str.startsWith("r")) {
                 System.out.println(str);
             }
         }
-          //output: rakesh rakhi ram
+        //output: rakesh rakhi ram
 
         //with filter and lambda expression by using streams
         System.out.println("with filter : ");
         list2.stream().filter(t -> t.startsWith("r")).forEach(t -> System.out.println(t));
-          //output: rakesh rakhi ram
+        //output: rakesh rakhi ram
+
+        System.out.println("map Fileter example :");
+
+        Map<Integer, String> mapFilter = new HashMap<>();
+        mapFilter.put(1, "trinadh");
+        mapFilter.put(2, "rakhi");
+        mapFilter.put(3, "Rayala");
+        mapFilter.put(4, "Kiran");
+
+        System.out.println("need to print the even map key values : ");
+
+        mapFilter.entrySet().stream().filter(k -> k.getKey() % 2 == 0).forEach(obj -> System.out.println(obj));
 
 
     }
