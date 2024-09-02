@@ -31,12 +31,35 @@ public class ForEachDemo {
         map.put(3, "rakhi");
 
         //2 ways we can use forEach with maps
-        map.forEach((key,value)->System.out.println(key +": "+value));
-          //output: 1: Trinadh  2: Bajji  3: rakhi
+        map.forEach((key, value) -> System.out.println(key + ": " + value));
+        //output: 1: Trinadh  2: Bajji  3: rakhi
 
-        map.entrySet().stream().forEach((obj)->System.out.println(obj));
-          //output: 1=Trinadh 2=Bajji 3=rakhi
+        map.entrySet().stream().forEach((obj) -> System.out.println(obj));
+        //output: 1=Trinadh 2=Bajji 3=rakhi
 
+        System.out.println("---------> Filter (Conditional Check)");
+        List<String> list2 = new ArrayList<>();
+        list2.add("trinadh");
+        list2.add("rakesh");
+        list2.add("kiran");
+        list2.add("mithil");
+        list2.add("Chandu");
+        list2.add("Lalith");
+        list2.add("rakhi");
+        list2.add("ram");
+
+        System.out.println(" need to print names start with r in traditional approach");
+        for (String str : list2) {
+            if(str.startsWith("r")){
+                System.out.println(str);
+            }
+        }
+          //output: rakesh rakhi ram
+
+        //with filter and lambda expression by using streams
+        System.out.println("with filter : ");
+        list2.stream().filter(t -> t.startsWith("r")).forEach(t -> System.out.println(t));
+          //output: rakesh rakhi ram
 
 
     }
