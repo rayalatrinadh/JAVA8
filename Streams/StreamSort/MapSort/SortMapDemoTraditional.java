@@ -10,6 +10,7 @@ public class SortMapDemoTraditional {
         map.put("rakesh",6);
         map.put("kiran",7);
 
+        System.out.println("***************************Traditional Approach*****************************");
         List<Map.Entry<String, Integer>> entries = new ArrayList<>(map.entrySet());
         Collections.sort(entries, new Comparator<Map.Entry<String, Integer>>() {
             @Override
@@ -21,5 +22,13 @@ public class SortMapDemoTraditional {
         for(Map.Entry<String,Integer> entry: entries){
             System.out.println(entry.getKey() +  " "+ entry.getValue());
         }
+
+        System.out.println("***************************Java 8 Lambda Function Approach*****************************");
+        Collections.sort(entries, (o1,o2) -> o1.getKey().compareTo(o2.getKey()));
+        for(Map.Entry<String,Integer> entry: entries){
+            System.out.println(entry.getKey() +  " "+ entry.getValue());
+        }
+
+
     }
 }
