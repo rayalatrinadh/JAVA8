@@ -29,6 +29,14 @@ public class SortMapDemoTraditional {
             System.out.println(entry.getKey() +  " "+ entry.getValue());
         }
 
+        System.out.println("***************************Java 8 Streams() Approach*****************************");
+        map.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
+
+        System.out.println("------ Comparing by value");
+        map.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
+
+
+
 
     }
 }
