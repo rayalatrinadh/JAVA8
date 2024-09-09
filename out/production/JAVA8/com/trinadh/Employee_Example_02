@@ -1,0 +1,117 @@
+package com.example.java8features;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class EmployeeStreamExample {
+    public static void main(String[] args) {
+        //consider 4 departments and set of employees from those departments
+
+        Department account = new Department("Account", 75);
+        Department hr = new Department("HR", 50);
+        Department ops = new Department("OP", 25);
+        Department tech = new Department("Tech", 150);
+
+        List<Employee> employeeList = Arrays.asList(
+                new Employee("kiran", 29, "kudapa", tech),
+                new Employee("Trinadh", 27, "kudapa", tech),
+                new Employee("Shaida", 26, "guntur", hr),
+                new Employee("Zannath", 27, "amalapuram", account),
+                new Employee("zameer", 25, "vijayawada", ops),
+                new Employee("teja", 28, "kothapeta", ops)
+
+        );
+
+        //Task 1 : List out all the employees who lives in "kudapa" city, sort them by their name and print the names of employees
+
+//        int n = employeeList.size();
+//        for(int i = 0; i < n; i++){
+//            if(employeeList.get(i).getCity().equalsIgnoreCase("kudapa"))
+//                System.out.println(employeeList.get(i).getName());
+//        }
+//        System.out.println("trinadh".compareTo("kiran"));
+
+        System.out.println("Task 1");
+        employeeList.stream()
+                .filter(e -> e.getCity().equalsIgnoreCase("kudapa"))
+                .sorted(Comparator.comparing(Employee::getName))
+                .forEach(e -> System.out.println(e.getName()));
+
+        //Task 2: Find Distinct department names that employees work for
+        System.out.println("Task 2");
+        employeeList.stream()
+                .map(e -> e.getDeparment().getDepartmentName())
+                .distinct()
+                .forEach(System.out::println);
+        //Task 3 : find the department names that these employees work for, where the number of employees in the department is over 1
+
+        System.out.println("task 3");
+
+        //rough employeeList.getDepartmentCount() > 1
+        employeeList.stream()
+                .map(Employee::getDeparment)
+                .filter(d -> (d.getNoOfEmployees() > 70))
+                .distinct()
+                .forEach(d -> System.out.println(d.getDepartmentName()));
+
+        //Task 4 : Create a comma separate string of department names sorted alphabetically
+        System.out.println("Task : 4");
+
+        String s = employeeList.stream()
+                .map(e -> e.getDeparment().getDepartmentName())
+                .distinct()
+                .sorted()
+                .reduce("", (a, b) -> (a + "," + b));
+        System.out.println(s);
+
+        //Task 5: Are there any Employees From HR Department ?
+        System.out.println("Task 5");
+
+        if (employeeList.stream()
+                .anyMatch(e -> e.getDeparment().getDepartmentName().equalsIgnoreCase("HR"))
+        ) {
+            System.out.println("Found Employees from HR department");
+        }
+
+        //Task 6: Print all employee's name who are working for account department
+        System.out.println("Task 6");
+        employeeList.stream()
+                .filter(e -> e.getDeparment().getDepartmentName().equalsIgnoreCase("account"))
+                .map(Employee::getName)
+                .forEach(System.out::println);
+
+
+        //Task 7: What is the Highest number of employees in all departments ?
+        System.out.println("Task 7");
+        employeeList.stream()
+                .map(e -> e.getDeparment().getNoOfEmployees())
+                .reduce(Integer :: max)
+                .ifPresent(System.out::print);
+
+        //Task 8: Find the department which has the highest number of employees.
+        System.out.println("Task 8");
+        employeeList.stream()
+                .map(Employee :: getDeparment)
+                .reduce( (d1,d2) -> d1.getNoOfEmployees() > d2.getNoOfEmployees() ? d1 : d2)
+                .ifPresent(d -> System.out.println(d.getDepartmentName()));
+
+        //Task 8.1 by using the max
+        System.out.println("Task 8.1");
+        employeeList.stream()
+                .map(Employee :: getDeparment)
+                .max(Comparator.comparing(Department :: getNoOfEmployees))
+                .ifPresent(d -> System.out.println(d.getDepartmentName()));
+
+        //Task 9: Find the total number of employees in all the departments.
+        System.out.println("Task 9");
+        employeeList.stream()
+                .map(e -> e.getDeparment().getNoOfEmployees())
+                .distinct().reduce(Integer :: sum).ifPresent(System.out::println);
+
+
+    }
+
+}
+
+
+//get Reference From  : https://www.javacodegeeks.com/2018/07/java-8-stream-examples.html#google_vignette
