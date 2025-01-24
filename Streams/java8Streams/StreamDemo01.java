@@ -99,6 +99,41 @@ One2Many -> flatmap
    //7. Find the average age of male and female students
 
 
+        //----------------------------------------------------- 2025, January 24th, Friday--------------------------------
+        System.out.println("8. Print all the phone Numbers ");
+        List<String> phoneNumbersList = studentList.stream()
+                .flatMap(std -> std.getContacts().stream())
+                .distinct()
+                .collect(Collectors.toList());
+
+        System.out.println(phoneNumbersList);
+
+        System.out.println("9. Print Group the Students by Department Names : ");
+
+        Map<String, List<Student>> groupStudentsByDept = studentList.stream()
+                .collect(Collectors.groupingBy(Student :: getDept));
+        System.out.println(groupStudentsByDept);
+
+      System.out.println("9.1 Print Group the Students by Department Names : Only FistNames in the list");
+
+      Map<String ,List<String>> groupStudentsByDeptFirstNames = studentList.stream()
+              .collect(Collectors.groupingBy(
+                      Student :: getDept,
+                      Collectors.mapping(Student::getFirstName, Collectors.toList())
+              ));
+      System.out.println(groupStudentsByDeptFirstNames);
+
+        System.out.println("9.2. Print Group the Students by Department Names : Only FirstNames in the list in AscendingOrder");
+
+        Map<String, List<String>> groupStudentsByDeptFirstNamesInAscendingORder = studentList.stream()
+                .collect(Collectors.groupingBy(
+                        Student :: getDept,
+                        Collectors.mapping(Student::getFirstName, Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> list.stream().sorted().collect(Collectors.toList())
+                        ))
+                ));
+        System.out.println(groupStudentsByDeptFirstNamesInAscendingORder);
 
 
     }
