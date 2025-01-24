@@ -108,7 +108,11 @@ public class EmployeeStreamExample {
                 .map(e -> e.getDeparment().getNoOfEmployees())
                 .distinct().reduce(Integer :: sum).ifPresent(System.out::println);
 
+ Map.Entry<String,Long> studentsByDeptNames = studentList.stream()
+                .collect(Collectors.groupingBy(Student::getDept, Collectors.counting()))
+                        .entrySet().stream().min(Map.Entry.comparingByValue()).get();
 
+        System.out.println(studentsByDeptNames);
     }
 
 }
