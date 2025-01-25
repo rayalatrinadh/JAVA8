@@ -135,6 +135,37 @@ One2Many -> flatmap
                 ));
         System.out.println(groupStudentsByDeptFirstNamesInAscendingORder);
 
+        System.out.println("10. List the students stay in chicago ");
+     List<Student> studentsInChicago = studentList.stream()
+             .filter(std -> std.getCity().equalsIgnoreCase("chicago"))
+             .sorted(Comparator.comparing(Student :: getFirstName,Comparator.reverseOrder()))
+                     .collect(Collectors.toList());
+
+     System.out.println(studentsInChicago);
+
+        System.out.println("10.01 List the students stay in chicago, only Names");
+   List<String> studentsInChicagoOnlyNames = studentList.stream()
+           .filter(std -> std.getCity().equalsIgnoreCase("Chicago"))
+           .map(Student :: getFirstName)
+           .collect(Collectors.toList());
+   System.out.println(studentsInChicagoOnlyNames);
+
+        System.out.println("10.02 List the students stay in chicago, only Names with Ascending Order");
+   List<String> studentsInChicagoOnlyNamesWithAscendingOrder = studentList.stream()
+           .filter(std -> std.getCity().equalsIgnoreCase("chicago"))
+           .sorted(Comparator.comparing(Student :: getFirstName))
+           .map(Student :: getFirstName)
+           .collect(Collectors.toList());
+
+   System.out.println(studentsInChicagoOnlyNamesWithAscendingOrder);
+
+        System.out.println("10.03 List the students stay in chicago, only Names with Descending Order");
+   List<String> studentsInChicagoOnlyNamesWithDescendingOrder = studentList.stream()
+           .filter(std -> std.getCity().equalsIgnoreCase("chicago"))
+           .sorted(Comparator.comparing(Student :: getFirstName, Comparator.reverseOrder()))
+           .map(Student :: getFirstName)
+           .collect(Collectors.toList());
+  System.out.println(studentsInChicagoOnlyNamesWithDescendingOrder);
 
     }
 }
