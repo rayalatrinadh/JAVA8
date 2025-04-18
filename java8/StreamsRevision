@@ -1,0 +1,63 @@
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class NthHighestSalaryDemo {
+
+
+    public static void main(String args[]){
+
+
+
+        Map<String, Integer> map1 = new HashMap<>();
+
+        map1.put("trinadh",1000);
+        map1.put("rakesh",2000);
+        map1.put("chandu",3000);
+        map1.put("shaida",4000);
+        map1.put("zannath",5000);
+        map1.put("rupesh",60000);
+
+
+        Map.Entry<String,Integer> results = getNthHighestSalary(3,map1);
+        System.out.println("result : " + results);
+
+
+        Map<String, Integer> map2 = new HashMap<>();
+
+        map2.put("trinadh",1000);
+        map2.put("rakesh",2000);
+        map2.put("chandu",3000);
+        map2.put("shaida",4000);
+        map2.put("zannath",5000);
+        map2.put("rupesh",6000);
+
+        List<Student> student = Stream.of(
+                        new Student(1,"Trinadh",19,"Male","computer","chicago",120, Arrays.asList("+13127921025","+917305786115")),
+                        new Student(2,"Rakesh",25,"Male","cyber","naperville",1, Arrays.asList("+123445","+567885")),
+                        new Student(3,"Kiran",27,"Male","computer","chicago",12, Arrays.asList("+123446","+567886")),
+                        new Student(4,"Kitturayala",26,"Male","cyber","chicago",12, Arrays.asList("+123446","+567886")),
+                        new Student(5,"Rob",27,"Female","computer","mendota",12, Arrays.asList("+123447","+567887")),
+                        new Student(6,"Michael",29,"Male","science","Chicago",10, Arrays.asList("+131279210255","+9173057861154")))
+                .collect(Collectors.toList());
+
+        Map<String, List<String>> namesByGender = student.stream()
+                .collect(Collectors.groupingBy(Student::getGender, Collectors.mapping(Student::getFirstName, Collectors.toList())));
+
+        System.out.println("Names By Gender: ");
+        System.out.println(namesByGender);
+
+
+    }
+
+    private static Map.Entry<String,Integer> getNthHighestSalary(int n, Map<String,Integer> map){
+        //Map<String, Integer> ans = new HashMap<String, Integer>();
+
+        //1. Firstly sort the values(salary) of map in descending order
+        //2. then return the nth highest salary
+
+        return map.entrySet().stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .collect(Collectors.toList())
+                .get(n - 1);
